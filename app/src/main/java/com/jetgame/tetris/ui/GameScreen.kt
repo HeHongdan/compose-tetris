@@ -55,6 +55,7 @@ import com.jetgame.tetris.ui.theme.ScreenBackground
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlin.math.min
 
+//(液晶)屏幕
 @ObsoleteCoroutinesApi
 @Composable
 fun GameScreen(modifier: Modifier = Modifier) {
@@ -123,10 +124,13 @@ fun GameScoreboard(
     isMute: Boolean = false,
     isPaused: Boolean = false
 ) {
+    //(有效)内容区域
     Row(modifier.fillMaxSize()) {
         Spacer(modifier = Modifier.weight(0.65f))
         val textSize = 12.sp
         val margin = 12.dp
+
+        //右边
         Column(
             Modifier
                 .fillMaxHeight()
@@ -216,9 +220,11 @@ private fun DrawScope.drawText(
         }
     }
     if (gameStatus == GameStatus.Onboard) {
-        drawText("TETRIS", 80f)
+//        drawText("TETRIS", 80f)
+        drawText("猪脚祯", 80f)
     } else if (gameStatus == GameStatus.GameOver) {
-        drawText("GAME OVER", 60f)
+        //drawText("GAME OVER", 60f)
+        drawText("你个老6", 60f)
     }
 }
 

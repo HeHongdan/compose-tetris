@@ -5,6 +5,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ToastUtils
+import com.ods.libtoast.Toast
 import com.jetgame.tetris.logic.Spirit.Companion.Empty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -13,6 +16,7 @@ import kotlinx.coroutines.withContext
 import kotlin.math.min
 
 
+//游戏的逻辑
 class GameViewModel : ViewModel() {
 
     private val _viewState: MutableState<ViewState> = mutableStateOf(ViewState())
@@ -23,6 +27,9 @@ class GameViewModel : ViewModel() {
         reduce(viewState.value, action)
 
 
+    //
+    //state：游戏状态
+    //action：触发动作
     private fun reduce(state: ViewState, action: Action) {
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
@@ -94,10 +101,12 @@ class GameViewModel : ViewModel() {
                         state.copy(spirit = spirit)
                     }
 
+                    //TODO 方块跳动逻辑
                     Action.GameTick -> run {
                         if (!state.isRuning) return@run state
 
                         //Spirit continue falling
+                        //方块继续坠落
                         if (state.spirit != Empty) {
                             val spirit = state.spirit.moveBy(Direction.Down.toOffset())
                             if (spirit.isValidInMatrix(state.bricks, state.matrix)) {
@@ -106,6 +115,7 @@ class GameViewModel : ViewModel() {
                         }
 
                         //GameOver
+                        //游戏结束
                         if (!state.spirit.isValidInMatrix(state.bricks, state.matrix)) {
                             return@run state.copy(
                                 gameStatus = GameStatus.ScreenClearing
@@ -139,17 +149,20 @@ class GameViewModel : ViewModel() {
                                 gameStatus = GameStatus.LineClearing
                             ).also {
                                 launch {
+                                    Toast.show("阿祯再爱阿强一次")
+
                                     //animate the clearing lines
                                     repeat(5) {
                                         emit(
                                             state.copy(
                                                 gameStatus = GameStatus.LineClearing,
                                                 spirit = Empty,
-                                                bricks = if (it % 2 == 0) noClear else clearing
+                                                bricks = if (it % 2 == 0) noClear else clearing,
                                             )
                                         )
                                         delay(100)
                                     }
+
                                     //delay emit new state
                                     emit(
                                         newState.copy(

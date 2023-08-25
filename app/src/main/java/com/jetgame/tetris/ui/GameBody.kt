@@ -33,12 +33,13 @@ import com.jetgame.tetris.logic.Direction
 import com.jetgame.tetris.ui.theme.BodyColor
 import com.jetgame.tetris.ui.theme.ScreenBackground
 
+//游戏机整体布局
 @Composable
 fun GameBody(
     clickable: Clickable = combinedClickable(),
     screen: @Composable () -> Unit
 ) {
-
+    //屏幕+按键
     Column(
         Modifier
             .fillMaxSize()
@@ -48,8 +49,8 @@ fun GameBody(
     ) {
 
         //Screen
+        //屏幕(包括边)
         Box(Modifier.align(Alignment.CenterHorizontally)) {
-
 
             Box(
                 modifier = Modifier
@@ -61,6 +62,7 @@ fun GameBody(
                     .background(BodyColor)
             )
 
+            //标题(自定义字体)=TETRIS
             Box(
                 Modifier
                     .width(120.dp)
@@ -85,6 +87,7 @@ fun GameBody(
                     .size(360.dp, 380.dp)
                     .padding(start = 50.dp, end = 50.dp, top = 50.dp, bottom = 30.dp)
             ) {
+                //阴影(屏幕外边距)
                 Canvas(modifier = Modifier.fillMaxSize()) {
                     drawScreenBorder(
                         Offset(0f, 0f),
@@ -94,6 +97,7 @@ fun GameBody(
                     )
                 }
 
+                //显示屏幕
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -118,6 +122,7 @@ fun GameBody(
 
 
         //Setting Button
+        //设置按键(中间)
         Column(
             modifier = Modifier
                 .padding(start = 40.dp, end = 40.dp)
@@ -127,10 +132,14 @@ fun GameBody(
                 SettingText(stringResource(id = R.string.button_pause), Modifier.weight(1f))
                 SettingText(stringResource(id = R.string.button_reset), Modifier.weight(1f))
             }
+
+            //间距
             Spacer(modifier = Modifier.height(5.dp))
+
             Row {
 
                 //SOUNDS
+                //声音
                 GameButton(
                     modifier = Modifier
                         .weight(1f)
@@ -140,6 +149,7 @@ fun GameBody(
                 ) {}
 
                 //PAUSE
+                //暂停/取消暂停
                 GameButton(
                     modifier = Modifier
                         .weight(1f)
@@ -149,6 +159,7 @@ fun GameBody(
                 ) {}
 
                 //RESET
+                //开始/重新开始
                 GameButton(
                     modifier = Modifier
                         .weight(1f)
@@ -160,11 +171,12 @@ fun GameBody(
             }
         }
 
-
+        //间距
         Spacer(modifier = Modifier.height(30.dp))
 
 
         //Game Button
+        //按钮样式
         val ButtonText = @Composable { modifier: Modifier,
                                        text: String ->
             Text(
@@ -174,12 +186,14 @@ fun GameBody(
             )
         }
 
+        //(底部)操控按键
         Row(
             modifier = Modifier
                 .padding(start = 40.dp, end = 40.dp)
                 .height(160.dp)
         ) {
             //DIRECTION BTN
+            //方向4键
             Box(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -220,8 +234,8 @@ fun GameBody(
 
             }
 
-
             //ROTATE BTN
+            //旋转键
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -236,12 +250,13 @@ fun GameBody(
                     ButtonText(it, stringResource(id = R.string.button_rotate))
                 }
             }
+
         }
 
     }
 }
 
-
+//屏幕的边
 fun DrawScope.drawScreenBorder(
     topLef: Offset,
     topRight: Offset,

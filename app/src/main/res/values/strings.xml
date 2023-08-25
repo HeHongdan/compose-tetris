@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Tetris</string>
-    <string name="body_label">TETRIS</string>
+    <string name="body_label">阿祯阿强</string>
+<!--    <string name="body_label">TETRIS</string>-->
     <string name="game_over_hint">GAME OVER</string>
     <string name="button_rotate">ROTATE</string>
     <string name="button_up">▲</string>

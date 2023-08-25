@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jetgame.tetris.logic.LedFontFamily
@@ -34,6 +35,8 @@ import java.util.*
 import kotlin.math.roundToInt
 
 
+//LED样式的字体(时钟)
+@Preview
 @Composable
 fun LedClock(modifier: Modifier = Modifier) {
 
@@ -89,6 +92,8 @@ fun LedClock(modifier: Modifier = Modifier) {
 
 }
 
+//LED样式的字体(一个数字)
+//@Preview
 @Composable
 fun LedNumber(
     modifier: Modifier = Modifier,

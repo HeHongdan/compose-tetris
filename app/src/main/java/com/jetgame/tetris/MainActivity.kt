@@ -60,12 +60,12 @@ class MainActivity : ComponentActivity() {
                     }
 
 
-                    GameBody(combinedClickable(
+                    GameBody(combinedClickable(//整个游戏机
                         onMove = { direction: Direction ->
                             if (direction == Direction.Up) viewModel.dispatch(Action.Drop)
                             else viewModel.dispatch(Action.Move(direction))
                         },
-                        onRotate = {
+                        onRotate = {//旋转
                             viewModel.dispatch(Action.Rotate)
                         },
                         onRestart = {
@@ -82,7 +82,7 @@ class MainActivity : ComponentActivity() {
                             viewModel.dispatch(Action.Mute)
                         }
                     )) {
-                        GameScreen(
+                        GameScreen(//显示屏
                             Modifier.fillMaxSize()
                         )
                     }
